@@ -35,6 +35,7 @@
 
 
 ## UI 구성
+https://github.com/boostcamp-2020/relay_11/issues/4
 
 ### 메인 페이지
 <img width="810" alt="스크린샷 2020-07-31 오후 5 08 51" src="https://user-images.githubusercontent.com/55074799/89014664-cee24080-d350-11ea-993a-5d4a4fae3feb.png">
