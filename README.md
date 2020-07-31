@@ -2,7 +2,7 @@
 
 
 
-<img width="852" alt="스크린샷 2020-07-31 오후 6 23 29" src="https://user-images.githubusercontent.com/55074799/89021167-08b84480-d35b-11ea-94bd-d9a2fd6f8f05.png">
+![image](https://user-images.githubusercontent.com/24909656/89021829-1b7f4900-d35c-11ea-824c-b017bcf24c1c.png)
 
 
 
