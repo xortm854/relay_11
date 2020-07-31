@@ -1,4 +1,8 @@
-# New 아이러브스쿨 (미정)
+# 모여봐요 동창의 숲
+
+
+
+<img width="852" alt="스크린샷 2020-07-31 오후 6 23 29" src="https://user-images.githubusercontent.com/55074799/89021167-08b84480-d35b-11ea-94bd-d9a2fd6f8f05.png">
 
 
 
@@ -93,7 +97,7 @@ entry/자유 게시판/entry 탭이 존재한다.(현재 탭은 다른 색으로
 https://github.com/boostcamp-2020/relay_11/issues/4 PW:boostcamp2020
 
 ### 메인 페이지
-<img width="810" alt="스크린샷 2020-07-31 오후 5 08 51" src="https://user-images.githubusercontent.com/55074799/89014664-cee24080-d350-11ea-993a-5d4a4fae3feb.png">
+![스크린샷 2020-07-31 오후 6 11 34](https://user-images.githubusercontent.com/55074799/89020302-a6127900-d359-11ea-83a4-4140d1bffec2.png)
 
 ### entry 페이지
 <img width="810" alt="스크린샷 2020-07-31 오후 5 08 56" src="https://user-images.githubusercontent.com/55074799/89014757-f802d100-d350-11ea-84aa-b067f95b9e97.png">
