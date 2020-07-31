@@ -36,6 +36,18 @@
 
 ## UI 구성
 
+### 메인 페이지
+<img width="810" alt="스크린샷 2020-07-31 오후 5 08 51" src="https://user-images.githubusercontent.com/55074799/89014664-cee24080-d350-11ea-993a-5d4a4fae3feb.png">
+
+### entry 페이지
+<img width="810" alt="스크린샷 2020-07-31 오후 5 08 56" src="https://user-images.githubusercontent.com/55074799/89014757-f802d100-d350-11ea-84aa-b067f95b9e97.png">
+
+### 자유 게시판
+<img width="795" alt="스크린샷 2020-07-31 오후 5 09 00" src="https://user-images.githubusercontent.com/55074799/89014766-fafdc180-d350-11ea-9aa2-e5f13dd0b436.png">
+
+### 사진첩 (글 작성)
+<img width="768" alt="스크린샷 2020-07-31 오후 5 09 22" src="https://user-images.githubusercontent.com/55074799/89014865-1cf74400-d351-11ea-84b5-24f97ca0f9f4.png">
+
 
 
 ## 참고할 API
