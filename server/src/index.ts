@@ -5,9 +5,8 @@ import { createConnection } from "typeorm";
 const main = async function () {
     const app = new Koa();
     // const router = new Router();
-    const connection = createConnection().then(() => {
-        console.log("connected");
-    });
+    const connection = await createConnection();
+    console.log('Database connection successfully.');
 
     app.listen(8080, () => {});
 };
