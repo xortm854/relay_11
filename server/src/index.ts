@@ -1,15 +1,17 @@
 import Koa from "koa";
+import bodyParser from "koa-bodyparser";
 import "reflect-metadata";
 import { createConnection } from "typeorm";
 
 const main = async function () {
     const app = new Koa();
-    // const router = new Router();
-    const connection = await createConnection();
-    console.log('Database connection successfully.');
+
+    app.use(bodyParser());
+
+    await createConnection();
+    console.log("Database connection successfully.");
 
     app.listen(8080, () => {});
 };
 
 main();
-
