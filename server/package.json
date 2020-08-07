@@ -11,11 +11,15 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/request": "^2.48.5",
+    "@types/request-promise-native": "^1.0.17",
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^9.1.0",
     "mysql2": "^2.1.0",
     "reflect-metadata": "^0.1.13",
+    "request": "^2.88.2",
+    "request-promise-native": "^1.0.9",
     "typeorm": "^0.2.25"
   },
   "devDependencies": {
