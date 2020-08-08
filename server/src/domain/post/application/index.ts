@@ -1,6 +1,7 @@
 import { Post } from '../model/post';
 import PostRequest from '../dto/post-request';
 import { filterSlang } from '../../../external-api/chk';
+import { getTags } from '../../../external-api/aws/comprehend'
 
 const savePost = (postRequest: PostRequest) => {
     const post = new Post();
@@ -12,8 +13,9 @@ const savePost = (postRequest: PostRequest) => {
 }
 
 export const register = async (postRequest: PostRequest) => {
-    const resultSlangFilter = await filterSlang(postRequest.content);
+    const [resultSlangFilter, tags] = await Promise.all([filterSlang(postRequest.content), getTags(postRequest.content)]);
+    console.log('비속어 필터링 결과: ', resultSlangFilter);
+    console.log('추출된 태그: ', tags);
     if (resultSlangFilter === "욕") throw new Error('비속어가 포함되어 있습니다.');
-    //이후 주요 단어 추출하는 api가 연동된다면 savePost를 호출하기 전에 실행될 수 있도록 추가해주세요.
     savePost(postRequest);
 }

@@ -11,8 +11,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/aws-sdk": "^2.7.0",
     "@types/request": "^2.48.5",
     "@types/request-promise-native": "^1.0.17",
+    "aws-sdk": "^2.728.0",
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
     "koa-router": "^9.1.0",
