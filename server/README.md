@@ -3,7 +3,7 @@
 
 * 프로젝트를 open 할때 relay11 디렉토리가 아닌 `server 디렉토리가 루트 디렉토리로 열리도록` open해 주세요.
 
-    ![스크린샷 2020-08-08 오후 1.59.37](./README.assets/스크린샷 2020-08-08 오후 1.59.37.png)
+    ![directory](./README.assets/directory.png)
 
 * 카테고리 역할을 하는 학교, 입학년도는 모델만 구현되었으며, 임의의 카테고리에 접속한 상황으로 가정하고 구현하였습니다.
 
@@ -112,15 +112,15 @@ POST "/posts"
 
 **정상 등록** : 게시글을 등록하고 **201 Created**로 응답합니다.
 
-![스크린샷 2020-08-09 오후 5.15.20](./README.assets/스크린샷 2020-08-09 오후 5.15.20.png)
+![response_201](./README.assets/response_201.png)
 
 **비속어 필터링, 태그 추출 결과**
 
-![스크린샷 2020-08-08 오후 1.57.18](./README.assets/스크린샷 2020-08-08 오후 1.57.18.png)
+![api_call_result](./README.assets/api_call_result.png)
 
 <br>
 
 **비속어가 포함된 경우** : 게시글을 저장하지 않고 **400 Bad Request** 를 응답합니다.
 
-![스크린샷 2020-08-07 오후 9.27.00-6803710](./README.assets/스크린샷 2020-08-07 오후 9.27.00-6803710.png)
+![response_400](./README.assets/response_400.png)
 
