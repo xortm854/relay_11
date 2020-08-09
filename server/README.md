@@ -3,16 +3,17 @@
 
 * 프로젝트를 open 할때 relay11 디렉토리가 아닌 `server 디렉토리가 루트 디렉토리로 열리도록` open해 주세요.
 
-    ![스크린샷 2020-08-08 오후 1.59.37](README.assets/스크린샷 2020-08-08 오후 1.59.37.png)
+    ![directory](./README.assets/directory.png)
 
-* 카테고리 역할을 하는 학교, 입학연도는 모델만 구현되었으며, 임의의 카테고리에 접속한 상황으로 가정하였습니다.
+* 카테고리 역할을 하는 학교, 입학년도는 모델만 구현되었으며, 임의의 카테고리에 접속한 상황으로 가정하고 구현하였습니다.
 
 <br>
 
 ## 📌 구현된 기능
 
-* 비속어 필터링 API, 중요 단어 추출 API 연동
 * 글쓰기 API
+* 비속어 필터링
+* 중요 단어를 태그로 추출
 
 <br>
 
@@ -39,6 +40,8 @@
 docker-compose up -d
 ```
 
+<br>
+
 컨테이너를 종료할때는 다음 커맨드를 실행해줍니다.
 
 ```
@@ -57,11 +60,11 @@ npm install
 
 <br>
 
-[Wiki](https://github.com/boostcamp-2020/relay_11/wiki/%5Bweek2%5D-중요한-단어-태그-추출) 를 참고하여 AWS API 호출을 위한 API KEY/SECRET을 발급 받습니다.
-
 `server` 디렉토리 아래에 aws.config.json 파일을 생성하고 아래와 같이 입력합니다.
 
-```json
+**accessKeyId** 와 **secretAccessKey** 에는 AWS에서 발급받은 keyId와 secretKey를 입력해주세요. ([Wiki](https://github.com/boostcamp-2020/relay_11/wiki/%5Bweek2%5D-중요한-단어-태그-추출) 참고)
+
+```
 { 
     "accessKeyId": <YOUR_ACCESS_KEY_ID>, 
     "secretAccessKey": <YOUR_SECRET_ACCESS_KEY>,
@@ -75,6 +78,7 @@ npm install
 
 ```
 npm start
+//개발시에는 npm run dev
 ```
 
 <br>
@@ -93,7 +97,7 @@ POST "/posts"
 
 **Request Body**
 
-```
+```json
 {
     "writer" : "작성자",
     "password" : "게시글 비밀번호",
@@ -106,15 +110,17 @@ POST "/posts"
 
 **Response**
 
-정상 등록 : 정상 등록될 경우 **201 Created**로 응답합니다.
+**정상 등록** : 게시글을 등록하고 **201 Created**로 응답합니다.
 
-![스크린샷 2020-08-07 오후 9.26.49](README.assets/스크린샷 2020-08-07 오후 9.26.49.png)
+![response_201](./README.assets/response_201.png)
 
-![스크린샷 2020-08-08 오후 1.57.18](README.assets/스크린샷 2020-08-08 오후 1.57.18.png)
+**비속어 필터링, 태그 추출 결과**
+
+![api_call_result](./README.assets/api_call_result.png)
 
 <br>
 
-비속어가 포함된 경우 : 비속어 필터링 API를 호출하여 비속어가 포함된 경우 **400 Bad Request** 를 응답합니다.
+**비속어가 포함된 경우** : 게시글을 저장하지 않고 **400 Bad Request** 를 응답합니다.
 
-![스크린샷 2020-08-07 오후 9.27.00-6803710](README.assets/스크린샷 2020-08-07 오후 9.27.00-6803710.png)
+![response_400](./README.assets/response_400.png)
 
