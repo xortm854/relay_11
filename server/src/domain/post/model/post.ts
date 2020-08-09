@@ -14,13 +14,13 @@ export class Post extends BaseEntity {
     id!: number;
 
     @Column()
-    year!: string;
-
-    @Column()
     title!: string;
 
     @Column()
     writer!: string;
+
+    @Column()
+    password!: string;
 
     @Column()
     content!: string;
