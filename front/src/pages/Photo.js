@@ -96,7 +96,7 @@ const Photo = ()=>{
                         onSubmit={(e)=>{
                             e.target.nextElementSibling.style.display='block';
                         }}
-                        /*{ 질문가능해요 -> 통신할때 axios 안쓰시고 fetch 쓰시는건가요?? 지금 프론트에서는 fetch 썼어요. 편하신걸로 골라 쓰시면 될것 같아요. }
+                        /*{ 질문가능해요 -> 도와드릴게 있나요?. 퇴근할준비해요! . }
                         
                         */
                     ></input>
