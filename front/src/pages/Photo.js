@@ -127,6 +127,18 @@ const Photo = ()=>{
         setimageInfoURL(image.src);
         setImgObject(loadedFiles[0]);
     },[]);
+
+    const yameWidth = useMemo(()=>{
+        if(imageInfoURL===null){
+            return {
+
+            };
+        }
+        return{
+            width:'0px',
+            height:'0px',
+        }
+    },[imageInfoURL]);
     
     return (
     
@@ -150,7 +162,7 @@ const Photo = ()=>{
             <PhotoMain>
                 <ImageWrapper>
                     {/* <Image id="image" src="https://user-images.githubusercontent.com/50394490/90222363-e2a89f00-de46-11ea-8ae7-ba3007602d84.png" fluid /> */}
-                    <BoostImage id="image" src={addPhoto} fluid ref={imageDom} />
+                    <BoostImage id="image" src={addPhoto} fluid ref={imageDom} style={yameWidth} />
                     <Canvas photoURL={imageInfoURL} boxInfos={boxInfos} selectedNumber={selectedNumber}/>
                 </ImageWrapper>
                 <div className="image-tag" style={{position:'relative',width:'80px',height:'30px'}}>
