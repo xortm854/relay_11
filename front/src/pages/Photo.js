@@ -57,6 +57,48 @@ const apiId = '2rPyGSTC49Dfplyx5UvD';
 const apiSecret = 'RuhsLmEX55';
 const val = {fontWeight:'bold'}
 const Photo = ()=>{
+
+    const requestApi = (imageFile) => {
+        let url = "http://localhost:3000/face";
+    
+        let formData = new FormData();
+        formData.append("img", imageFile);
+    
+        return fetch(url,{
+            method: "POST",
+            body: formData,
+          })
+          .then((result) => {
+            return result.json();
+          })
+          .then((json) => {
+            let result = [];
+            json.faces.forEach((e)=>{
+                let age = e.age.value;
+                let gender = e.gender.value;
+                let emotion = e.emotion.value;
+                let x = e.roi.x;
+                let y = e.roi.y;
+                let width = e.roi.width;
+                let height = e.roi.height;
+                result.push({
+                    age,
+                    gender,
+                    emotion,
+                    x,
+                    y,
+                    width,
+                    height
+                });
+            });
+            setBoxInfos(result);
+          })
+          .catch((err) => {
+            new Error(" API Error");
+          });
+    }
+
+    
     const [imgObject,setImgObject] = useState(null);
     const [manLength,setManLength] = useState(0);
     const imageDom = useRef(null);
@@ -84,7 +126,6 @@ const Photo = ()=>{
         image.src = window.URL.createObjectURL(loadedFiles[0]);
         setimageInfoURL(image.src);
         setImgObject(loadedFiles[0]);
-        // setBoxInfos([]);
     },[]);
     
     return (
@@ -148,38 +189,5 @@ const Photo = ()=>{
         </div>
     );
 }
-
-const requestApi = (imageFile) => {
-    let url = "https://openapi.naver.com/v1/vision/face";
-
-    let formData = new FormData();
-    formData.append("image", imageFile);
-
-    return fetch(url,{
-        method: "POST",
-        cache: "no-cache",
-        headers: {
-                'X-Naver-Client-Id':apiId,
-                'X-Naver-Client-Secret':apiSecret,
-                'Access-Control-Allow-Origin': '*',     
-                'Allow-Control-Allow-Origin': '*'     
-        },
-        body: formData,
-      })
-      .then((result) => {
-        alert(result);
-        return result.json();
-      })
-      .then((json) => {
-        alert(json);
-        console.log(json);
-      })
-      .catch((err) => {
-        new Error(" API Error");
-      });
-}
-
-
-
 
 export default Photo;

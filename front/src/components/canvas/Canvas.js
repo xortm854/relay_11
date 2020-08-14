@@ -40,6 +40,7 @@ const Canvas = ({photoURL,boxInfos,selectedNumber})=>{
         if(boxInfos.length!==0 && imageObject !== null){
             console.log('run');
             const ctx = canvasRef.current.getContext('2d');
+            ctx.strokeStyle='#107EE8';
             boxInfos.forEach((e)=>{
                 console.log(e);
                 console.log(rate);
