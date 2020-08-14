@@ -122,5 +122,3 @@ https://azure.microsoft.com/ko-kr/services/cognitive-services/face/
 
 **중요한 단어 추출(핵심어구 추출)**
 https://aws.amazon.com/ko/comprehend/
-
-써집니다.ㅣㅓㅜㅏㅓㅜㅏㅓㅝㅏㅝㅝㅓㅏㅓㅏ
