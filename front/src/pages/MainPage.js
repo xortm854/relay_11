@@ -25,7 +25,6 @@ function MainPage(){
 
 
     return(
-        
       <>      
         <h2>모여봐요 동창의 숲.</h2>
         <TextField  name="school" value={school} label="학교" onChange={onChange}/><br/>
