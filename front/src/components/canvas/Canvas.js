@@ -33,7 +33,8 @@ const Canvas = ({photoURL,selectedNumber})=>{
     //canvas 그림 업로드
     useEffect(()=>{
         if(imageObject!==null){
-
+            const ctx = canvasRef.current.getContext('2d');
+            ctx.drawImage(imageObject,0,0,canvasSize[0],canvasSize[1]);
         }
     },[imageObject]);
 
