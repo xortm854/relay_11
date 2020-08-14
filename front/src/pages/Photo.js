@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from 'react-bootstrap/Button';
-import Badge from 'react-bootstrap/Badge'
-import Image from 'react-bootstrap/Image'
+import Badge from 'react-bootstrap/Badge';
+import {Image as BoostImage} from 'react-bootstrap';
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import { Link } from "react-router-dom";
@@ -10,6 +10,7 @@ import axios from 'axios';
 import addPhoto from './addPhoto1.png';
 import './Photo.css';
 import {useState,useCallback,useMemo,useEffect,useRef} from 'react';
+import Canvas from '../components/canvas/Canvas';
 
 const PhotoHeader = styled.header`
 display: flex;
@@ -44,26 +45,27 @@ const Photo = ()=>{
     const [manLength,setManLength] = useState(0);
     const imageDom = useRef(null);
 
-    const manBedges = useMemo(()=>{
+    const [imageInfoURL,setimageInfoURL] = useState(null);
+    const [selectedNumber,setSelectedNumber] = useState(-1);
 
+    const manBedges = useMemo(()=>{
     },[manLength]);
 
     const testAPI = useEffect(()=>{
-        console.log('call');
+        console.log(imageInfoURL);
         if(imgObject!==null){
             requestApi(imgObject);
         }
-    },[imgObject]);
+    },[imgObject,imageInfoURL]);
 
     const imageChange = useCallback((e)=>{
         let inputNode = e.target;
         let loadedFiles = inputNode.files;
         let image = imageDom.current;
+        let newImageInfo = new Image();
         requestApi(loadedFiles[0]);
         image.src = window.URL.createObjectURL(loadedFiles[0]);
-        image.onload = (e) => {
-            window.URL.revokeObjectURL(e.target.src);
-        };
+        setimageInfoURL(image.src);
         setImgObject(loadedFiles[0]);
     },[]);
     
@@ -89,7 +91,8 @@ const Photo = ()=>{
             <PhotoMain>
                 <ImageWrapper>
                     {/* <Image id="image" src="https://user-images.githubusercontent.com/50394490/90222363-e2a89f00-de46-11ea-8ae7-ba3007602d84.png" fluid /> */}
-                    <Image id="image" src={addPhoto} fluid ref={imageDom} />
+                    <BoostImage id="image" src={addPhoto} fluid ref={imageDom} />
+                    <Canvas photoURL={imageInfoURL} selectedNumber={selectedNumber}/>
                 </ImageWrapper>
                 <div className="image-tag" style={{position:'relative',width:'80px',height:'30px'}}>
                     <input style={{width:'80px',height:'30px', position:'absolute'}}
@@ -131,10 +134,8 @@ const Photo = ()=>{
 const requestApi = (imageFile) => {
     let url = "https://openapi.naver.com/v1/vision/face";
 
-    console.log(imageFile);
     let formData = new FormData();
     formData.append("image", imageFile);
-    console.log(formData);
 
     return fetch(url,{
         method: "POST",
