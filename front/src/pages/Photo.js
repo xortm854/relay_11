@@ -36,6 +36,22 @@ margin:0 auto;
 text-align:center;
 `;
 
+const testInfos = [{
+    x:0,
+    y:0,
+    width:40,
+    height:40,
+},{
+    x:10,
+    y:10,
+    width:40,
+    height:40,
+},{
+    x:40,
+    y:40,
+    width:40,
+    height:40,
+}];
 const apiURL = 'https://openapi.naver.com/v1/vision/face';
 const apiId = '2rPyGSTC49Dfplyx5UvD';
 const apiSecret = 'RuhsLmEX55';
@@ -47,7 +63,8 @@ const Photo = ()=>{
 
     const [imageInfoURL,setimageInfoURL] = useState(null);
     const [selectedNumber,setSelectedNumber] = useState(-1);
-
+    // const [boxInfos,setBoxInfos] = useState([]);
+    const [boxInfos,setBoxInfos]=useState(testInfos);
     const manBedges = useMemo(()=>{
     },[manLength]);
 
@@ -67,6 +84,7 @@ const Photo = ()=>{
         image.src = window.URL.createObjectURL(loadedFiles[0]);
         setimageInfoURL(image.src);
         setImgObject(loadedFiles[0]);
+        // setBoxInfos([]);
     },[]);
     
     return (
@@ -92,7 +110,7 @@ const Photo = ()=>{
                 <ImageWrapper>
                     {/* <Image id="image" src="https://user-images.githubusercontent.com/50394490/90222363-e2a89f00-de46-11ea-8ae7-ba3007602d84.png" fluid /> */}
                     <BoostImage id="image" src={addPhoto} fluid ref={imageDom} />
-                    <Canvas photoURL={imageInfoURL} selectedNumber={selectedNumber}/>
+                    <Canvas photoURL={imageInfoURL} boxInfos={boxInfos} selectedNumber={selectedNumber}/>
                 </ImageWrapper>
                 <div className="image-tag" style={{position:'relative',width:'80px',height:'30px'}}>
                     <input style={{width:'80px',height:'30px', position:'absolute'}}

@@ -15,7 +15,7 @@ function loadImage(src){
     });
 }
 
-const Canvas = ({photoURL,selectedNumber})=>{
+const Canvas = ({photoURL,boxInfos,selectedNumber})=>{
     const canvasRef=useRef(null);
     const [imageObject,setImageObject] = useState(null);
 
@@ -36,9 +36,22 @@ const Canvas = ({photoURL,selectedNumber})=>{
             const ctx = canvasRef.current.getContext('2d');
             ctx.drawImage(imageObject,0,0,canvasSize[0],canvasSize[1]);
         }
-    },[imageObject]);
+        // 이미지를 그린후 박스를 체크해준다.
+        if(boxInfos.length!==0 && imageObject !== null){
+            console.log('run');
+            const ctx = canvasRef.current.getContext('2d');
+            boxInfos.forEach((e)=>{
+                console.log(e);
+                console.log(rate);
+                ctx.strokeRect(e.x*rate,e.y*rate,e.width*rate,e.height*rate);
+            });
+        }
+    },[imageObject,boxInfos]);
 
-        // width rate, height rate
+    // 클릭 되어졌을때 수정하는 함수
+    useEffect(()=>{
+
+    },[]);
     /*
     원본 대비 스케일이 몇인지 판별하는 memo
     */
@@ -61,7 +74,7 @@ const Canvas = ({photoURL,selectedNumber})=>{
         if(imageObject.width<=maxWidth){
             return [imageObject.width,imageObject.height];
         }
-        console.log(rate);
+
         return [rate*imageObject.width,rate*imageObject.height];
 
     },[imageObject,rate]);
