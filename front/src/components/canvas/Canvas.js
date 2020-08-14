@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import {useState,useEffect,useCallback,useMemo,useRef} from 'react';
 
+const maxWidth = 590;
+
 function loadImage(src){
     return new Promise((resolve,reject)=>{
         console.log('loadImage');
@@ -35,27 +37,36 @@ const Canvas = ({photoURL,selectedNumber})=>{
         }
     },[imageObject]);
 
-    //canvas에 그림 그리기(네모 박스)
-
-    const width = useMemo(()=>{
-        if(imageObject===null){
-            return 0;
-        }else{
-            console.log(imageObject);
-            return imageObject.width;
-        }
+        // width rate, height rate
+    /*
+    원본 대비 스케일이 몇인지 판별하는 memo
+    */
+   const rate = useMemo(()=>{
+    if(imageObject===null){
+        return 0;
+    }
+    if(imageObject.width<=maxWidth){
+        return 1;
+    }
+    let rate = maxWidth/imageObject.width;
+    return rate;
     },[imageObject]);
 
-    const height = useMemo(()=>{
+    //canvas 사이즈 계산기, 0[width] 1[height]
+    const canvasSize = useMemo(()=>{
         if(imageObject===null){
-            return 0;
+            return [0,0];
         }
-        console.log(imageObject);
-        return imageObject.height;
-    },[imageObject]);
+        if(imageObject.width<=maxWidth){
+            return [imageObject.width,imageObject.height];
+        }
+        console.log(rate);
+        return [rate*imageObject.width,rate*imageObject.height];
+
+    },[imageObject,rate]);
 
     return(
-        <canvas width={width} height={height} ref={canvasRef}>
+        <canvas width={canvasSize[0]} height={canvasSize[1]} ref={canvasRef} style={{display:'block',margin:'0 auto'}}>
 
         </canvas>
     );
