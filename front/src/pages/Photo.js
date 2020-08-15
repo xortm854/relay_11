@@ -41,7 +41,8 @@ margin:0 auto;
 text-align:center;
 `;
 
-const apiURL = 'https://openapi.naver.com/v1/vision/face';
+const operationURL = 'http://101.101.217.78/face';
+const apiURL = operationURL;
 const apiId = '2rPyGSTC49Dfplyx5UvD';
 const apiSecret = 'RuhsLmEX55';
 const val = {fontWeight:'bold'}
@@ -49,7 +50,7 @@ const val = {fontWeight:'bold'}
 const Photo = ()=>{
 
     const requestApi = (imageFile) => {
-        let url = "http://localhost:3000/face";
+        let url = operationURL;
     
         let formData = new FormData();
         formData.append("img", imageFile);

@@ -59,7 +59,7 @@ const Canvas = ({photoURL,boxInfos,selectedNumber})=>{
     // 클릭 되어졌을때 수정하는 함수
     const canvasClick = useCallback((e)=>{
         const ctx = canvasRef.current.getContext('2d');
-        if(canvasBoxObject.length!==0){
+        if(canvasBoxObject!==null&&canvasBoxObject.length!==0){
             for(let i=0;i<canvasBoxObject.length;i++){
                 if(ctx.isPointInPath(canvasBoxObject[i],e.nativeEvent.offsetX,e.nativeEvent.offsetY)){
                     selectedNumber(i);
