@@ -12,6 +12,11 @@ import './Photo.css';
 import {useState,useCallback,useMemo,useEffect,useRef} from 'react';
 import Canvas from '../components/canvas/Canvas';
 
+const ManNameSpace = styled.div`
+padding:5px;
+text-align:center;
+`;
+
 const PhotoHeader = styled.header`
 display: flex;
 justify-content:space-between;
@@ -56,6 +61,7 @@ const apiURL = 'https://openapi.naver.com/v1/vision/face';
 const apiId = '2rPyGSTC49Dfplyx5UvD';
 const apiSecret = 'RuhsLmEX55';
 const val = {fontWeight:'bold'}
+
 const Photo = ()=>{
 
     const requestApi = (imageFile) => {
@@ -92,6 +98,8 @@ const Photo = ()=>{
                 });
             });
             setBoxInfos(result);
+            setMansName((new Array(result.length)).fill(''));
+            setSelectedNumber(-1);
           })
           .catch((err) => {
             new Error(" API Error");
@@ -104,9 +112,11 @@ const Photo = ()=>{
     const imageDom = useRef(null);
 
     const [imageInfoURL,setimageInfoURL] = useState(null);
+    // selectedNumber
     const [selectedNumber,setSelectedNumber] = useState(-1);
     // const [boxInfos,setBoxInfos] = useState([]);
     const [boxInfos,setBoxInfos]=useState(testInfos);
+    const [mansName,setMansName] = useState([]);
     const manBedges = useMemo(()=>{
     },[manLength]);
 
@@ -139,6 +149,28 @@ const Photo = ()=>{
             height:'0px',
         }
     },[imageInfoURL]);
+
+    const manNameInput = useMemo(()=>{
+    return selectedNumber !== -1 ? <p>{selectedNumber}번째 인물의 이름을 지어주세요!</p> : <p>사람의 얼굴을 눌러주세요.</p>
+    },[selectedNumber]);
+
+    const manNameChange = (e)=>{
+        console.log(e.target.value);
+        if(selectedNumber!==-1){
+            let newArray = [...mansName];
+            newArray[selectedNumber]=e.target.value;
+            setMansName(newArray);
+        }
+    }
+
+    const inputValue = useMemo(()=>{
+        if(selectedNumber===-1){
+            return '';
+        }else{
+            console.log(mansName);
+            return mansName[selectedNumber];
+        }
+    },[selectedNumber,mansName]);
     
     return (
     
@@ -163,7 +195,7 @@ const Photo = ()=>{
                 <ImageWrapper>
                     {/* <Image id="image" src="https://user-images.githubusercontent.com/50394490/90222363-e2a89f00-de46-11ea-8ae7-ba3007602d84.png" fluid /> */}
                     <BoostImage id="image" src={addPhoto} fluid ref={imageDom} style={yameWidth} />
-                    <Canvas photoURL={imageInfoURL} boxInfos={boxInfos} selectedNumber={selectedNumber}/>
+                    <Canvas photoURL={imageInfoURL} boxInfos={boxInfos} selectedNumber={setSelectedNumber}/>
                 </ImageWrapper>
                 <div className="image-tag" style={{position:'relative',width:'80px',height:'30px'}}>
                     <input style={{width:'80px',height:'30px', position:'absolute'}}
@@ -171,7 +203,6 @@ const Photo = ()=>{
                             e.target.nextElementSibling.style.display='block';
                         }}
                         /*{ 질문가능해요 -> 도와드릴게 있나요?. 퇴근할준비해요! . }
-                        
                         */
                     ></input>
                     <Badge className="tag" style={{width:'80px',height:'30px' , position:'absolute'}} variant="secondary"
@@ -184,6 +215,10 @@ const Photo = ()=>{
                 {/* <Badge variant="secondary">New</Badge>
                 <Badge variant="secondary">New</Badge>
                 <Badge variant="secondary">New</Badge> */}
+                <ManNameSpace>
+                    {manNameInput}
+                    <input value={inputValue} onChange={manNameChange}/>
+                </ManNameSpace>
                 <PhotoFooter>
                     <input style={{width:'60%'}} value="사진을 첨부해주세요." disabled></input>
                     <Button variant="secondary" size="sm">

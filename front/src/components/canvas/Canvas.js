@@ -4,6 +4,7 @@ import {useState,useEffect,useCallback,useMemo,useRef} from 'react';
 
 const maxWidth = 590;
 
+// isPointInPath
 function loadImage(src){
     return new Promise((resolve,reject)=>{
         console.log('loadImage');
@@ -18,7 +19,8 @@ function loadImage(src){
 const Canvas = ({photoURL,boxInfos,selectedNumber})=>{
     const canvasRef=useRef(null);
     const [imageObject,setImageObject] = useState(null);
-
+    // 박스 감지용 객체
+    const [canvasBoxObject,setCanvasBoxObject]=useState(null);
     useEffect(()=>{
         if(photoURL===null){
             setImageObject(null);
@@ -39,20 +41,33 @@ const Canvas = ({photoURL,boxInfos,selectedNumber})=>{
         // 이미지를 그린후 박스를 체크해준다.
         if(boxInfos.length!==0 && imageObject !== null){
             console.log('run');
+            let boxes = [];
             const ctx = canvasRef.current.getContext('2d');
-            ctx.strokeStyle='#107EE8';
+            ctx.strokeStyle='#000';
             boxInfos.forEach((e)=>{
                 console.log(e);
                 console.log(rate);
-                ctx.strokeRect(e.x*rate,e.y*rate,e.width*rate,e.height*rate);
+                const rectangle = new Path2D();
+                rectangle.rect(e.x*rate,e.y*rate,e.width*rate,e.height*rate);
+                boxes.push(rectangle);
+                ctx.stroke(rectangle);
             });
+            setCanvasBoxObject(boxes);
         }
     },[imageObject,boxInfos]);
 
     // 클릭 되어졌을때 수정하는 함수
-    useEffect(()=>{
-
-    },[]);
+    const canvasClick = useCallback((e)=>{
+        const ctx = canvasRef.current.getContext('2d');
+        if(canvasBoxObject.length!==0){
+            for(let i=0;i<canvasBoxObject.length;i++){
+                if(ctx.isPointInPath(canvasBoxObject[i],e.nativeEvent.offsetX,e.nativeEvent.offsetY)){
+                    selectedNumber(i);
+                    return;
+                }
+            }
+        }
+    },[canvasBoxObject,boxInfos,selectedNumber,canvasRef.current])
     /*
     원본 대비 스케일이 몇인지 판별하는 memo
     */
@@ -81,7 +96,7 @@ const Canvas = ({photoURL,boxInfos,selectedNumber})=>{
     },[imageObject,rate]);
 
     return(
-        <canvas width={canvasSize[0]} height={canvasSize[1]} ref={canvasRef} style={{display:'block',margin:'0 auto'}}>
+        <canvas onClick={canvasClick} width={canvasSize[0]} height={canvasSize[1]} ref={canvasRef} style={{display:'block',margin:'0 auto'}}>
 
         </canvas>
     );
