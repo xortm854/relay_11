@@ -41,22 +41,6 @@ margin:0 auto;
 text-align:center;
 `;
 
-const testInfos = [{
-    x:0,
-    y:0,
-    width:40,
-    height:40,
-},{
-    x:10,
-    y:10,
-    width:40,
-    height:40,
-},{
-    x:40,
-    y:40,
-    width:40,
-    height:40,
-}];
 const apiURL = 'https://openapi.naver.com/v1/vision/face';
 const apiId = '2rPyGSTC49Dfplyx5UvD';
 const apiSecret = 'RuhsLmEX55';
@@ -115,17 +99,12 @@ const Photo = ()=>{
     // selectedNumber
     const [selectedNumber,setSelectedNumber] = useState(-1);
     // const [boxInfos,setBoxInfos] = useState([]);
-    const [boxInfos,setBoxInfos]=useState(testInfos);
+    const [boxInfos,setBoxInfos]=useState([]);
     const [mansName,setMansName] = useState([]);
+
     const manBedges = useMemo(()=>{
     },[manLength]);
 
-    const testAPI = useEffect(()=>{
-        console.log(imageInfoURL);
-        if(imgObject!==null){
-            requestApi(imgObject);
-        }
-    },[imgObject,imageInfoURL]);
 
     const imageChange = useCallback((e)=>{
         let inputNode = e.target;
@@ -171,6 +150,22 @@ const Photo = ()=>{
             return mansName[selectedNumber];
         }
     },[selectedNumber,mansName]);
+
+    const manInfo = useMemo(()=>{
+        if(selectedNumber===-1||boxInfos.length===0||boxInfos===undefined||boxInfos[selectedNumber]===undefined){
+            return null;
+        }
+        let {age,gender,emotion} = boxInfos[selectedNumber];
+        let list = [
+            age,
+            gender,
+            emotion
+        ];
+        list = list.filter((e)=>e!==undefined);
+        return list.map((e)=>{
+            return <Badge variant="secondary" style={{marginRight:'10px'}}>{e}</Badge>
+        })
+    },[selectedNumber,boxInfos]);
     
     return (
     
@@ -210,6 +205,9 @@ const Photo = ()=>{
                             e.target.style.display='none';
                         }}
                     >New</Badge> 
+                </div>
+                <div>
+                    {manInfo}
                 </div>
                 
                 {/* <Badge variant="secondary">New</Badge>
