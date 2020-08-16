@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
+import {Link} from 'react-router-dom';
 
 const initialInputs = {
     school : '',
@@ -25,15 +25,14 @@ function MainPage(){
 
 
     return(
-        
       <>      
         <h2>모여봐요 동창의 숲.</h2>
         <TextField  name="school" value={school} label="학교" onChange={onChange}/><br/>
         <TextField  name="year" value={year} label="년도" onChange={onChange}/><br/>
         <Button variant="contained" onClick={onClick}>이동</Button>
-        </>
+        <Link to="/photo">3주차 결과물 보러가기</Link>
+      </>
     );
-    
 }
 
 
