@@ -15,9 +15,9 @@ require('dotenv')
 //;;;;
 module.exports = {
   port: "3306",
-  username: "relay16",
-  password: "Boostcamp!",
-  database: "relay16",
-  host: "db-4lhue.pub-cdb.ntruss.com",
+  username: "boost",
+  password: "boost1234!",
+  database: "relay",
+  host: "db-4ntib.pub-cdb.ntruss.com",
   dialect: "mysql",
 }

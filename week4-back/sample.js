@@ -1,18 +1,25 @@
 const {
-    userkeyword,
     user //사용할 테이블 명
 } = require('./sequelize/models') // relay16/src/sequelize/model/index.js 
 
-// 유저 삽입
-user.create({
-    id: "groot",
-    nickname: "i'am groot",
-    password: "groot"
-}).then(results => {
-    console.dir("RESULT =" + results) //결과 받아와서 동작
-}).catch(err => {
-    console.log("ERR = " + err)
-})
+// // 유저 삽입
+// for (let i = 0; i < 100; i++) {
+//     user.create({
+//         id: i,
+//         "nickname": `${i}user`,
+//         "abcd": "",
+//         "music": Math.floor(Math.random() * 5),
+//         "game":Math.floor(Math.random() * 5),
+//         "sports": Math.floor(Math.random() * 5),
+//         "movie": Math.floor(Math.random() * 5),
+//         "travel": Math.floor(Math.random() * 5),
+//     }).then(results => {
+//         console.dir("RESULT =" + results) //결과 받아와서 동작
+//     }).catch(err => {
+//         console.log("ERR = " + err)
+//     })
+
+// }
 
 // //수정
 // user.update({

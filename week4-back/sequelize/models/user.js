@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
                 type: DataTypes.INTEGER ,
                 allowNull: true
             },
-            movie: {
+            travel: {
                 type: DataTypes.INTEGER ,
                 allowNull: true
             },
