@@ -15,20 +15,24 @@ module.exports = (sequelize, DataTypes) => {
                 primaryKey: true,
                 allowNull: false // null 허용 설정
             },
-            password: {
-                type:  DataTypes.STRING(255), 
-                allowNull: false
-            },
-            character: {
-                type:  DataTypes.STRING(255), 
+            music: {
+                type: DataTypes.INTEGER ,
                 allowNull: true
             },
-            job: {
-                type:  DataTypes.STRING(255), 
+            sports: {
+                type: DataTypes.INTEGER ,
                 allowNull: true
             },
-            hobby: {
-                type:  DataTypes.STRING(255), 
+            movie: {
+                type: DataTypes.INTEGER ,
+                allowNull: true
+            },
+            game: {
+                type: DataTypes.INTEGER ,
+                allowNull: true
+            },
+            movie: {
+                type: DataTypes.INTEGER ,
                 allowNull: true
             },
         }, {
@@ -39,11 +43,5 @@ module.exports = (sequelize, DataTypes) => {
         }
     );
 
-    user.associate = m => {
-        user.hasMany(m.userkeyword, {
-            foreignKey: 'userid',
-            onDelete: 'cascade'
-        })
-    }
     return user
 };
